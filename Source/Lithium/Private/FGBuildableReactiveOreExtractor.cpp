@@ -12,24 +12,25 @@ void AFGBuildableReactiveOreExtractor::BeginPlay()
 {
     Super::BeginPlay();
     // Set up input inventory
-    mItemsPerCycle = 6;
-    mInputInventory->SetReplicationRelevancyOwner(this);
+    mItemsPerCycle = 12;
+    GetInputInventory()->SetReplicationRelevancyOwner(this);
     GetInputInventory()->SetAllowedItemOnIndex(0, mCatalystItemClass);
     GetOutputInventory()->SetAllowedItemOnIndex(0, mOutputItemClass);
     GetOutputInventory()->RemoveArbitrarySlotSize(0);
     ForEachComponent<UFGFactoryConnectionComponent>(true, [&](UFGFactoryConnectionComponent* FactoryConn) {
         switch (FactoryConn->GetDirection()) {
         case EFactoryConnectionDirection::FCD_INPUT:
-            FactoryConn->SetInventory(GetInputInventory());
-            FactoryConn->SetInventoryAccessIndex(0);
+            mInputInventoryConnection = FactoryConn;
+            mInputInventoryConnection->SetInventory(GetInputInventory());
+            mInputInventoryConnection->SetInventoryAccessIndex(0);
             break;
         case EFactoryConnectionDirection::FCD_OUTPUT:
-            FactoryConn->SetInventory(GetOutputInventory());
-            FactoryConn->SetInventoryAccessIndex(0);
+            mOutputInventoryConnection = FactoryConn;
+            mOutputInventoryConnection->SetInventory(GetOutputInventory());
+            mOutputInventoryConnection->SetInventoryAccessIndex(0);
             break;
         }
         });
-    // It would be better to cache connections but my pc is weak - can't test, don't care
 }
 bool AFGBuildableReactiveOreExtractor::CanProduce_Implementation() const
 {
@@ -39,6 +40,7 @@ bool AFGBuildableReactiveOreExtractor::CanProduce_Implementation() const
         && GetOutputInventory()->HasEnoughSpaceForStack(Stack);
 }
 
+// Static helper for simple grabbing. Not written by me, thanks, community for helping with this
 static FInventoryStack GrabOutputFromFactory(UFGFactoryConnectionComponent* Comp, TSubclassOf<UFGItemDescriptor> type, int32 space)
 {
     float Offset;
@@ -67,15 +69,9 @@ void AFGBuildableReactiveOreExtractor::Factory_Tick(float dt)
     }
 
     //Grab Items into input inventory
-    UFGFactoryConnectionComponent* InputConnection;
-    ForEachComponent<UFGFactoryConnectionComponent>(false, [&](UFGFactoryConnectionComponent* FactoryConn) {
-        if (FactoryConn->GetDirection() == EFactoryConnectionDirection::FCD_INPUT) {
-            InputConnection = FactoryConn;
-        }
-        });
         int32 space = GetInputInventory()->GetSlotSize(0, mCatalystItemClass) - GetInputInventory()->GetNumItems(mCatalystItemClass);
         FInventoryStack Stack;
-        if (space > 0) Stack = GrabOutputFromFactory(InputConnection, mCatalystItemClass, space);
+        if (space > 0) Stack = GrabOutputFromFactory(mInputInventoryConnection, mCatalystItemClass, space);
         if (Stack.HasItems()) {
         mInputInventory->AddStackToIndex(0, Stack);
     }
@@ -100,7 +96,7 @@ void AFGBuildableReactiveOreExtractor::Factory_TickProducing(float dt)
         mCurrentExtractProgress -= 1.0f;
     }
 }
-
+// UI helpers
 float AFGBuildableReactiveOreExtractor::GetCatalystConsumptionPerMinute() const
 {
     const float cycleTime = GetProductionCycleTime();

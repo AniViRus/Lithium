@@ -36,7 +36,7 @@ public:
     UFUNCTION(BlueprintPure, Category = "Extraction")
     float GetNumExtractedItemsPerMinute() const;
 
-
+    /** /I hardcode these since this resource extractor is only used for one resource **/
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default")
     TSubclassOf<class UFGItemDescriptor> mOutputItemClass;
 

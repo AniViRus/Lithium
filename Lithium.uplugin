@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 0,
-	"VersionName": "0.8.4",
+	"VersionName": "0.8.8",
 	"FriendlyName": "Lithium",
 	"Description": "Adds a new raw resource - Lithium together with new items, buildings and Space Elevator Parts",
 	"Category": "Modding",
@@ -38,7 +38,7 @@
 			"SemVersion": "^2.3.0"
 		}
 	],
-	"SemVersion": "0.8.4",
+	"SemVersion": "0.8.8",
 	"GameVersion": ">=383729",
 	"LocalizationTargets": [
 		{
