@@ -46,6 +46,8 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Default", meta = (ClampMin = "1"))
     int32 mCatalystItemsPerCycle;
 
+protected:
+    virtual bool IsConfigured() const override;
 private:
     UPROPERTY()
     class UFGInventoryComponent* mInputInventory;

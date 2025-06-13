@@ -30,8 +30,13 @@ void AFGBuildableReactiveOreExtractor::BeginPlay()
             mOutputInventoryConnection->SetInventoryAccessIndex(0);
             break;
         }
-        });
+    });
 }
+
+bool AFGBuildableReactiveOreExtractor::IsConfigured() const {
+    return true;
+}
+
 bool AFGBuildableReactiveOreExtractor::CanProduce_Implementation() const
 {
     // All the imaginable checks
