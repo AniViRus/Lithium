@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 0,
-	"VersionName": "0.9.1",
+	"VersionName": "0.9.2",
 	"FriendlyName": "Lithium",
 	"Description": "Adds a new raw resource - Lithium together with new items, buildings and Space Elevator Parts",
 	"Category": "Modding",
@@ -25,7 +25,7 @@
 		{
 			"Name": "SML",
 			"Enabled": true,
-			"SemVersion": "^3.11.0"
+			"SemVersion": "^3.11.1"
 		},
 		{
 			"Name": "DynamicProgressionHUD",
@@ -38,8 +38,8 @@
 			"SemVersion": "^2.4.0"
 		}
 	],
-	"SemVersion": "0.9.1",
-	"GameVersion": ">=410840",
+	"SemVersion": "0.9.2",
+	"GameVersion": ">=416835",
 	"LocalizationTargets": [
 		{
 			"Name": "Lithium",
