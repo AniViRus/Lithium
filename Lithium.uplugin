@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.0.3",
+	"VersionName": "1.1.0",
 	"FriendlyName": "Lithium",
 	"Description": "Adds a new raw resource - Lithium together with new items, buildings and Space Elevator Parts",
 	"Category": "Modding",
@@ -25,15 +25,20 @@
 		{
 			"Name": "SML",
 			"Enabled": true,
-			"SemVersion": "^3.11.1"
+			"SemVersion": "^3.11.3"
 		},
 		{
 			"Name": "DynamicProgressionHUD",
 			"Enabled": true,
 			"SemVersion": "^1.1.5"
+		},
+		{
+			"Name": "DroneChargers",
+			"Enabled": true,
+			"SemVersion": ">=0.8.0"
 		}
 	],
-	"SemVersion": "1.0.3",
+	"SemVersion": "1.1.0",
 	"GameVersion": ">=416835",
 	"LocalizationTargets": [
 		{
