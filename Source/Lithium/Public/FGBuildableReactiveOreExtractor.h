@@ -50,11 +50,11 @@ protected:
     virtual bool IsConfigured() const override;
 private:
     UPROPERTY()
-    class UFGInventoryComponent* mInputInventory;
+    TObjectPtr<class UFGInventoryComponent> mInputInventory;
 
     UPROPERTY()
-    class UFGFactoryConnectionComponent* mInputInventoryConnection;
+    TObjectPtr<class UFGFactoryConnectionComponent> mInputInventoryConnection;
 
     UPROPERTY()
-    class UFGFactoryConnectionComponent* mOutputInventoryConnection;
+    TObjectPtr<class UFGFactoryConnectionComponent> mOutputInventoryConnection;
 };
